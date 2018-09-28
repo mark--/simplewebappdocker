@@ -1,11 +1,14 @@
 
 pipeline {
-    agent any
+    agent none
     stages {
-        stage("Checkout") {
+        stage("Choose Environment") {
             steps {
-                checkout scm
-                script { currentBuild.result = 'SUCCESS'}
+                script { 
+                 env.DEPLOYENV = input message: 'On which environment should the application be employed?',
+              	parameters: [choice(name: 'Environment', choices: 'dev\ntest\nprod')]
+                
+                }
             }
         }
 
