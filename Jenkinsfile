@@ -8,17 +8,6 @@ pipeline {
                 script { currentBuild.result = 'SUCCESS'}
             }
         }
-        stage("Push Test") {
-            tools {
-                docker "docker"
-            }
-            steps { sh "docker  clean deploy" }
-            post {
-                failure {
-                    script { currentBuild.result = 'FAILED'}
-                }
-            }
-        }
 
 
 
