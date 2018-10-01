@@ -36,7 +36,7 @@
 				<configuration>
 					<images>
 						<image>
-							<name>localhost:8082/${project.groupId}/${project.artifactId}:${project.version}</name>
+							<name>${project.groupId}/${project.artifactId}:${project.version}</name>
 							<build>
 								<dockerFile>Dockerfile</dockerFile>
 								<assembly>
@@ -62,6 +62,7 @@
 							<goal>build</goal>
 						</goals>
 					</execution>
+					<!-- 
 					<execution>
 						<id>push</id>
 						<phase>install</phase>
@@ -69,6 +70,7 @@
 							<goal>push</goal>
 						</goals>
 					</execution>
+					 -->
 				</executions>
 			</plugin>
 
