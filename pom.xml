@@ -2,12 +2,12 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<groupId>de.kvwl.test</groupId>
 	<artifactId>simplewebapp</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	
+
 	<dependencies>
 
 		<dependency>
@@ -26,7 +26,7 @@
 
 	<build>
 		<finalName>simplewebapp</finalName>
-		
+
 		<plugins>
 			<plugin>
 				<groupId>io.fabric8</groupId>
@@ -40,13 +40,29 @@
 							<build>
 								<dockerFile>Dockerfile</dockerFile>
 								<assembly>
-									<name>res</name>
+									<name>app</name>
 									<inline>
 										<files>
 											<file>
 												<source>${project.build.directory}/${project.build.finalName}.war</source>
 											</file>
 										</files>
+									</inline>
+								</assembly>
+							</build>
+						</image>
+						<image>
+							<name>localhost:8082/${project.groupId}/${project.artifactId}-test:${project.version}</name>
+							<build>
+								<dockerFile>DockerfileTest</dockerFile>
+								<assembly>
+									<name>test</name>
+									<inline>
+										<fileSet>
+											<directory>src/test/resources/test/scripts</directory>
+											<outputDirectory>scripts</outputDirectory>
+											<fileMode>700</fileMode>
+										</fileSet>
 									</inline>
 								</assembly>
 							</build>

@@ -1,0 +1,6 @@
+FROM localhost:8083/centos:7
+RUN yum install -y wget
+RUN wget https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/5.1.4/flyway-commandline-5.1.4-linux-x64.tar.gz -O /tmp/flyway.tgz 
+RUN mkdir /tmp/flyway && tar xvfz  /tmp/flyway.tgz -C /tmp/flyway --strip-components=1
+COPY test/scripts/ /tmp/testscripts/
+ENTRYPOINT /tmp/testscripts/test.sh
