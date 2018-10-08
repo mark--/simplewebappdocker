@@ -2,7 +2,6 @@
 FROM centos:7
 EXPOSE 8080
 RUN yum install -y tomcat
-#RUN systemctl enable tomcat
 COPY postgresql-42.2.5.jar /usr/share/tomcat/lib
 COPY tomcat-dbcp-7.0.30.jar /usr/share/java/tomcat-dbcp-7.0.30.jar
 COPY context.xml /usr/share/tomcat/conf/context.xml

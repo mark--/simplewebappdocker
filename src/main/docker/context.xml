@@ -1,43 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context>
 
-    <WatchedResource>WEB-INF/web.xml</WatchedResource>
-    <!--   <WatchedResource>${catalina.base}/conf/web.xml</WatchedResource> po -->
-<!-- 
-	<Environment
-				name="location/configuration/bvsync" 
-				value="C:/source/kvwl-projects/bv-portal/conf/bv-sync.properties" 
-				type="java.lang.String" 
-				override="false"/>
+	<WatchedResource>WEB-INF/web.xml</WatchedResource>
 
-	<Environment
-				name="location/configuration/bvweb" 
-				value="C:/source/kvwl-projects/bv-portal/conf/bv-web.properties" 
-				type="java.lang.String" 
-				override="false"/>
- -->
- <!-- 
-<Resource   
-                        name="jdbc/bvportaldb"
-                        auth="Container" 
-                        type="javax.sql.DataSource"
-                        driverClassName="oracle.jdbc.OracleDriver"
-                        maxTotal="100" 
-                        maxIdle="1" 
-                        maxWaitMillis="100"           
-                        url="jdbc:oracle:thin:@192.168.255.95:1521:oracledb"
-                        username="bvportal"
-                        password="bvportal"
-                        validationQuery="SELECT 1 FROM DUAL" /> -->
-
-<Resource name="jdbc/postgres" auth="Container" type="javax.sql.DataSource"
-          username="postgres"
-          password="mysecretpassword"
-          driverClassName="org.postgresql.Driver"
-          factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
-          url="jdbc:postgresql://db:5432/postgres"
-          maxTotal="60"
-          maxIdle="20"
-          validationQuery="select 1" /> 
+	<Resource name="jdbc/postgres" auth="Container"
+		type="javax.sql.DataSource" username="postgres"
+		password="reverse" driverClassName="org.postgresql.Driver"
+		factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+		url="jdbc:postgresql://database:5432/postgres" maxTotal="60"
+		maxIdle="20" validationQuery="select 1" />
 
 </Context>

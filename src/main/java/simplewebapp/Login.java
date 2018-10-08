@@ -21,89 +21,122 @@ public class Login
     public boolean login(String login, String password, HttpSession session)
     {
         LOG.info("Login requested: login={}, password={}", login, password);
-        
-        if (login != null) {
-        	Credentials credentials = retrieveCredentials(login);
-        	
-        	if (credentials != null && credentials.getLogin().equals(login) && credentials.getPassword().equals(password)) {
-        		  session.setAttribute("authenticated", true);
-                  return true;
-        	} else {
+        LOG.info("Login 2 requested: login={}, password={}", login, password);
+
+        if (login != null)
+        {
+            LOG.info("Received credentials object");
+            Credentials credentials = retrieveCredentials(login);
+
+            if (credentials != null && credentials.getLogin().equals(login)
+                && credentials.getPassword().equals(password))
+            {
+                LOG.info("Successful authentication");
+                session.setAttribute("authenticated", true);
+                return true;
+            }
+            else
+            {
+                LOG.info("Failed authentication");
                 session.setAttribute("authenticated", false);
                 return false;
             }
-        } else {
+        }
+        else
+        {
+            LOG.info("Did not receive credentials object");
             session.setAttribute("authenticated", false);
             return false;
         }
     }
-    
-    protected Credentials retrieveCredentials(String login) {
-		Context ctx = null;
-		Connection con = null;
-		Statement stmt = null;
-		ResultSet rs = null;
-		Credentials credentials = null;
-		try{
-			ctx = new InitialContext();
-			DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/postgres");
-			
-			con = ds.getConnection();
-			stmt = con.createStatement();
-			
-			rs = stmt.executeQuery("select login,password from credentials where login='"+login+"'");
-			LOG.info("Executing SQL Statement");
-			
-			
-			
-            while(rs.next())
+
+    protected Credentials retrieveCredentials(String login)
+    {
+        Context ctx = null;
+        Connection con = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        Credentials credentials = null;
+        try
+        {
+            ctx = new InitialContext();
+            DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/postgres");
+
+            con = ds.getConnection();
+            stmt = con.createStatement();
+
+            rs = stmt.executeQuery("select login,password from credentials where login='" + login + "'");
+            LOG.info("Executing SQL Statement");
+
+            while (rs.next())
             {
-            	LOG.info("Building Credentials");
-            	credentials = new Credentials();
+                LOG.info("Building Credentials");
+                credentials = new Credentials();
                 credentials.setLogin(rs.getString("login"));
                 credentials.setPassword(rs.getString("password"));
                 break;
             }
-            
-		}catch(NamingException e){
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally{
-			try {
-				rs.close();
-				stmt.close();
-				con.close();
-				ctx.close();
-			} catch (SQLException e) {
-				System.out.println("Exception in closing DB resources");
-			} catch (NamingException e) {
-				System.out.println("Exception in closing Context");
-			} catch (Exception e) {
-				System.out.println("Some exception occured");
-			}
-			
-		}
-		
-		return credentials;
-	}
-    
-    static class Credentials {
-    
-    	String login;
-    	String password;
-    	
-		public String getLogin() {
-			return login;
-		}
-		public void setLogin(String login) {
-			this.login = login;
-		}
-		public String getPassword() {
-			return password;
-		}
-		public void setPassword(String password) {
-			this.password = password;
-		}
+
+        }
+        catch (NamingException e)
+        {
+            e.printStackTrace();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            try
+            {
+                rs.close();
+                stmt.close();
+                con.close();
+                ctx.close();
+            }
+            catch (SQLException e)
+            {
+                System.out.println("Exception in closing DB resources");
+            }
+            catch (NamingException e)
+            {
+                System.out.println("Exception in closing Context");
+            }
+            catch (Exception e)
+            {
+                System.out.println("Some exception occured");
+            }
+
+        }
+
+        return credentials;
+    }
+
+    static class Credentials
+    {
+
+        String login;
+        String password;
+
+        public String getLogin()
+        {
+            return login;
+        }
+
+        public void setLogin(String login)
+        {
+            this.login = login;
+        }
+
+        public String getPassword()
+        {
+            return password;
+        }
+
+        public void setPassword(String password)
+        {
+            this.password = password;
+        }
     }
 }

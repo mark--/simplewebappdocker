@@ -3,7 +3,9 @@
 <body>
 	<h2>Hello World!</h2>
 
+	<span>
 	<%=request.getParameter("msg")%>
+	</span>
 
 	<form action="login.jsp">
 		<label>Login</label><br /> <input type="text" name="login"> <br />

@@ -1,0 +1,141 @@
+{
+  "id": "817d58b5-5dc1-4801-8cf4-5b7147832e91",
+  "version": "1.1",
+  "name": "SimpleWebApp",
+  "url": "http://localhost:9090",
+  "tests": [{
+    "id": "d053f804-bca9-4952-9711-548cc1ce5cb0",
+    "name": "Login Success",
+    "commands": [{
+      "id": "1b5fc157-0423-405c-aaa4-8f3284680079",
+      "comment": "",
+      "command": "open",
+      "target": "/simplewebapp",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "dd61b8db-b5aa-408c-b3cd-a7ba0b6d0890",
+      "comment": "",
+      "command": "type",
+      "target": "name=login",
+      "targets": [
+        ["name=login", "name"],
+        ["css=input[name=\"login\"]", "css"],
+        ["xpath=//input[@name='login']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "mark"
+    }, {
+      "id": "34987bbb-486d-4cca-8f67-a477d2c4e7db",
+      "comment": "",
+      "command": "type",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=input[name=\"password\"]", "css"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "reverse"
+    }, {
+      "id": "1143f229-5581-4bf8-9f58-b8cfe92cc43d",
+      "comment": "",
+      "command": "click",
+      "target": "css=input[type=\"submit\"]",
+      "targets": [
+        ["css=input[type=\"submit\"]", "css"],
+        ["xpath=//input[@value='Login']", "xpath:attributes"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "70f9e276-be1a-4ac0-a0e2-30e6a6c679d8",
+      "comment": "",
+      "command": "verifyText",
+      "target": "css=h2",
+      "targets": [
+        ["css=h2", "css"],
+        ["xpath=//h2", "xpath:position"]
+      ],
+      "value": "Welcome"
+    }]
+  }, {
+    "id": "752e75eb-7172-4be5-8e71-1f050fe3cc9a",
+    "name": "Login Fail",
+    "commands": [{
+      "id": "4304ec0f-761c-4590-a22f-54cfca11371f",
+      "comment": "",
+      "command": "open",
+      "target": "/simplewebapp/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8a029bec-747b-4ed1-b9e2-d63a4446620a",
+      "comment": "",
+      "command": "click",
+      "target": "name=login",
+      "targets": [
+        ["name=login", "name"],
+        ["css=input[name=\"login\"]", "css"],
+        ["xpath=//input[@name='login']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "18035270-1a0f-46d6-9150-728cb559c506",
+      "comment": "",
+      "command": "type",
+      "target": "name=login",
+      "targets": [
+        ["name=login", "name"],
+        ["css=input[name=\"login\"]", "css"],
+        ["xpath=//input[@name='login']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "mark"
+    }, {
+      "id": "91682f4c-4321-4e0f-a8f4-c90441c6d7e5",
+      "comment": "",
+      "command": "type",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=input[name=\"password\"]", "css"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "fail"
+    }, {
+      "id": "8fe4dcea-3bc1-4c97-b080-865a0c7e2f17",
+      "comment": "",
+      "command": "click",
+      "target": "css=input[type=\"submit\"]",
+      "targets": [
+        ["css=input[type=\"submit\"]", "css"],
+        ["xpath=//input[@value='Login']", "xpath:attributes"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8c211c6c-7349-4216-8682-eb5c7445ebb5",
+      "comment": "",
+      "command": "verifyText",
+      "target": "css=span",
+      "targets": [
+        ["css=span", "css"],
+        ["//span", "xpath:position"]
+      ],
+      "value": "Ungueltig"
+    }]
+  }],
+  "suites": [{
+    "id": "ba1e8104-e44e-43fb-a877-adfbabc1771b",
+    "name": "Login Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["d053f804-bca9-4952-9711-548cc1ce5cb0", "752e75eb-7172-4be5-8e71-1f050fe3cc9a"]
+  }],
+  "urls": ["http://localhost:9090/"],
+  "plugins": []
+}
